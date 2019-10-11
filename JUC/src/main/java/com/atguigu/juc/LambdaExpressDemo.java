@@ -26,5 +26,22 @@ interface Foo{
  */
 public class LambdaExpressDemo {
     public static void main(String[] args) {
+/*
+        Foo foo1 = new Foo() {
+            @Override
+            public int add(int x, int y) {
+                return 0;
+            }
+        };
+*/
+
+        Foo foo = (int x,int y)->{
+            System.out.println("***come in add method");
+            return x+y;
+        };
+
+        System.out.println(foo.add(3,5));
+        System.out.println(foo.div(10,2));
+        System.out.println(Foo.mul(2,3));
     }
 }

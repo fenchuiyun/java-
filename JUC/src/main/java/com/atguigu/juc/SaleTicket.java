@@ -1,10 +1,28 @@
 package com.atguigu.juc;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 class Ticket{//资源类
     private int number = 30;
 
-    public synchronized void sale(){
+/*    public synchronized void sale(){
         if(number>0){
             System.out.println(Thread.currentThread().getName()+"\t卖出第:"+(number--)+"\t还剩下:"+number);
+        }
+    }*/
+    Lock lock = new ReentrantLock();
+
+    public void sale(){
+        lock.lock();
+        try{
+            if (number > 0) {
+                System.out.println(Thread.currentThread().getName()+"\t卖出第:"+(number--)+"\t还剩下:"+number);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            lock.unlock();
         }
     }
 }
@@ -23,7 +41,7 @@ class Ticket{//资源类
 public class SaleTicket {
     public static void main(String[] args) {
 
-        final Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket();
         new Thread(()->{ for (int i = 0; i <40 ; i++) ticket.sale();},"A").start();
         new Thread(()->{ for (int i = 0; i <40 ; i++) ticket.sale();},"B").start();
         new Thread(()->{ for (int i = 0; i <40 ; i++) ticket.sale();},"C").start();
