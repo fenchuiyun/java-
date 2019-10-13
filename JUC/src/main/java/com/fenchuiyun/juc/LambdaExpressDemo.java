@@ -1,4 +1,4 @@
-package com.atguigu.juc;
+package com.fenchuiyun.juc;
 
 @FunctionalInterface//显示的声明他是函数型接口 语法上保证
 interface Foo{

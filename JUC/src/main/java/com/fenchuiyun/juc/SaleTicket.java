@@ -1,4 +1,4 @@
-package com.atguigu.juc;
+package com.fenchuiyun.juc;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
