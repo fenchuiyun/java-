@@ -39,6 +39,7 @@ class ShareResource{
             //判断
             while (flag!=2){
                 //B系统就要停
+                c2.await();
             }
             //2 干活
             for (int i = 0; i <10 ; i++) {
@@ -60,6 +61,7 @@ class ShareResource{
             //判断
             while (flag!=3){
                 //C系统就要停
+                c3.await();
             }
             //2 干活
             for (int i = 0; i <15 ; i++) {
@@ -94,13 +96,19 @@ public class ThreadOrderAccess {
     public static void main(String[] args) {
         ShareResource shareResource = new ShareResource();
         new Thread(()->{
-            shareResource.print5();
-        },"input thread name").start();
+            for (int i = 0; i <10 ; i++) {
+                shareResource.print5();
+            }
+        },"A").start();
         new Thread(()->{
-            shareResource.print10();
-        },"input thread name").start();
+            for (int i = 0; i <10 ; i++) {
+                shareResource.print10();
+            }
+        },"B").start();
         new Thread(()->{
-            shareResource.print15();
-        },"input thread name").start();
+            for (int i = 0; i <10 ; i++) {
+                shareResource.print15();
+            }
+        },"C").start();
     }
 }
