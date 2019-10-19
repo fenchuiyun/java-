@@ -13,7 +13,7 @@ public class CountDownLatchDemo {
         for (int i = 0; i < 6; i++) {
             new Thread(()->{
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(0);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -24,5 +24,6 @@ public class CountDownLatchDemo {
         countDownLatch.await();
         //countDownLatch.await(2L, TimeUnit.SECONDS);
         System.out.println(Thread.currentThread().getName()+"\t 关门离开");
+        System.out.println(countDownLatch.getCount());
     }
 }

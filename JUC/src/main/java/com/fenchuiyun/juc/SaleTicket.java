@@ -3,6 +3,7 @@ package com.fenchuiyun.juc;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -53,7 +54,16 @@ public class SaleTicket {
         try{
             for (int i= 0;i<30;i++){//模拟30个人来买票,提交请求
                 System.out.println("第"+i+"次提交");
-                executorService.submit(()->{ticket.sale();});
+
+                executorService.submit(()->{
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        System.out.println("!!!!");
+                    }
+                    ticket.sale();
+                });
 
             }
             System.out.println("---------------------------");
